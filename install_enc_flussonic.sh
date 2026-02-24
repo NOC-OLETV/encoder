@@ -1,7 +1,7 @@
 #!/bin/bash
 #CRIANDO ROTA MULTICAST
 echo "INSTALANDO ROTA MULTICAST"
-cat <<EOF > /usr/local/src/route_multicast.sh
+cat <<EOF > /usr/local/src/rota_multicast.sh
 #!/bin/bash
 ip route add 224.0.0.0/4 dev NOME_INTERFACE_AQUI
 EOF
