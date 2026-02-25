@@ -30,6 +30,5 @@ touch logs_backup
 
 #Criando sasl_passwd
 touch /etc/postfix/sasl_passwd
-postmap /etc/postfix/sasl_passwd
-chmod 600 /etc/postfix/sasl_passwd*
+chmod 600 /etc/postfix/sasl_passwd /etc/postfix/sasl_passwd.db
 systemctl restart postfix
