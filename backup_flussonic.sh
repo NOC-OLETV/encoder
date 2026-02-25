@@ -3,7 +3,7 @@
 apt install -y postfix mailutils mutt 
 
 #Criando arquivo para o scrip
-cat <<EOF > /usr/local/src/backup_flussonic.sh
+cat <<EOF > /usr/local/src/encoder/backup_flussonic.sh
 #!/bin/bash
 
 ORIGEM="/etc/flussonic/flussonic.conf"
@@ -19,7 +19,7 @@ cp "$ORIGEM" "$ARQUIVO_BACKUP" 2>>/etc/flussonic/logs_backup
 #ENVIADO E-MAIL
 mutt -s "[Flussonic Backup] SRV-ENCODER-(NOME-ENC-AQUI) $DATA" -a "$ARQUIVO_BACKUP" -- noc@oletv.net.br < /dev/null 2>>/etc/flussonic/logs_backup
 EOF
-chmod +x /usr/local/src/backup_flussonic.sh 
+chmod +x /usr/local/src/encoder/backup_flussonic.sh 
 
 #Criando diretorio para backup
 mkdir /etc/flussonic/backup
