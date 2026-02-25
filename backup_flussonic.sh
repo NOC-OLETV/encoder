@@ -11,7 +11,7 @@ DESTINO="/etc/flussonic/backup"
 
 DATA=$(date +%d%m%Y)
 
-ARQUIVO_BACKUP="$DESTINO/backup_flussonic_IP-ENC-AQUI_$DATA.conf"
+ARQUIVO_BACKUP="$DESTINO/backup_flussonic_(IP-ENC-AQUI)_$DATA.conf"
 
 #COPIANDO LOCALMENTE
 cp "$ORIGEM" "$ARQUIVO_BACKUP" 2>>/etc/flussonic/logs_backup
