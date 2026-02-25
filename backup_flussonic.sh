@@ -11,13 +11,13 @@ DESTINO="/etc/flussonic/backup"
 
 DATA=$(date +%d%m%Y)
 
-ARQUIVO_BACKUP="$DESTINO/backup_flussonic_192.168.234.10_$DATA.conf"
+ARQUIVO_BACKUP="$DESTINO/backup_flussonic_IP-ENC-AQUI_$DATA.conf"
 
 #COPIANDO LOCALMENTE
 cp "$ORIGEM" "$ARQUIVO_BACKUP" 2>>/etc/flussonic/logs_backup
 
 #ENVIADO E-MAIL
-mutt -s "[Flussonic Backup] ENC-192.168.234.10 $DATA" -a "$ARQUIVO_BACKUP" -- noc@oletv.net.br < /dev/null 2>>/etc/flussonic/logs_backup
+mutt -s "[Flussonic Backup] SRV-ENCODER-(NOME-ENC-AQUI) $DATA" -a "$ARQUIVO_BACKUP" -- noc@oletv.net.br < /dev/null 2>>/etc/flussonic/logs_backup
 EOF
 chmod +x /usr/local/src/backup_flussonic.sh 
 
