@@ -1,35 +1,17 @@
-#!/bin/bash
-#Instalando pacotes
-apt install -y postfix mailutils mutt 
+#INSTALANDO PACOTES
+apt install -y postfix mailutils mutt
 
-#Criando arquivo para o scrip
-cat <<EOF > /usr/local/src/encoder/backup_flussonic.sh
-#!/bin/bash
+#ALTERANDO SERVIDOR DE E-MAIL
+sed -i 's/relayhost = /relayhost = [corpmail.ole.net.br]:25/' /etc/postfix/main.cf
+»smtp_sasl_auth_enable = yes
+»smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
+»smtp_sasl_security_options = noanonymous
 
-ORIGEM="/etc/flussonic/flussonic.conf"
-DESTINO="/etc/flussonic/backup"
-
-DATA=$(date +%d%m%Y)
-
-ARQUIVO_BACKUP="$DESTINO/backup_flussonic_(IP-ENC-AQUI)_$DATA.conf"
-
-#COPIANDO LOCALMENTE
-cp "$ORIGEM" "$ARQUIVO_BACKUP" 2>>/etc/flussonic/logs_backup
-
-#ENVIADO E-MAIL
-mutt -s "[Flussonic Backup] SRV-ENCODER-(NOME-ENC-AQUI) $DATA" -a "$ARQUIVO_BACKUP" -- noc@oletv.net.br < /dev/null 2>>/etc/flussonic/logs_backup
-EOF
-chmod +x /usr/local/src/encoder/backup_flussonic.sh 
-
-#Criando diretorio para backup
-mkdir /etc/flussonic/backup
-
-#Criando arquivo para salvar os logs do backup
-cd /etc/flussonic/
-touch logs_backup
-
-#Criando sasl_passwd
+#CONFIGURANDO CREDENCIAS
+echo [corpmail.ole.net.br]:25 monitoramento@oletv.net.br:MOnitor@@2026 > /etc/postfix/sasl_passwd
 postmap /etc/postfix/sasl_passwd
-#[mail2.ole.net.br]:587 noc@oletv.net.br > /etc/postfix/sasl_passwd
 chmod 600 /etc/postfix/sasl_passwd /etc/postfix/sasl_passwd.db
-systemctl restart postfix
+systemctl restart postfix.service
+
+#PERMISSAO FLUSSONIC
+chmod 644 /etc/flussonic/flussonic.conf
