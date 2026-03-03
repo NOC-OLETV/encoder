@@ -10,8 +10,4 @@ echo smtp_sasl_security_options = noanonymous >> /etc/postfix/main.cf
 #CONFIGURANDO CREDENCIAS
 echo [corpmail.ole.net.br]:25 monitoramento@oletv.net.br:MOnitor@@2026 > /etc/postfix/sasl_passwd
 postmap /etc/postfix/sasl_passwd
-chmod 600 /etc/postfix/sasl_passwd /etc/postfix/sasl_passwd.db
 systemctl restart postfix.service
-
-#PERMISSAO FLUSSONIC
-chmod 644 /etc/flussonic/flussonic.conf
